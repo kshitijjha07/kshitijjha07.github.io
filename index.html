@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kshitij Jha — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --border: #222;
+      --accent: #5CDB95;
+      --accent2: #378ADD;
+      --text: #f0f0f0;
+      --muted: #888;
+      --card: #161616;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(92,219,149,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      border: 1px solid rgba(92,219,149,0.3);
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .name {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .name span { color: var(--accent); }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 1.75rem;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 2.25rem 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child { border-bottom: none; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skill-group { margin-bottom: 1.1rem; }
+    .skill-title {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 0.5rem;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 4px 13px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+    }
+    .pill.lang  { border-color: rgba(92,219,149,0.4); color: var(--accent);  background: rgba(92,219,149,0.05); }
+    .pill.tool  { border-color: rgba(55,138,221,0.4); color: var(--accent2); background: rgba(55,138,221,0.05); }
+
+    /* ── PROJECT CARDS ── */
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: #333; }
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 1rem;
+    }
+    .project-name { font-weight: 500; font-size: 1rem; }
+    .project-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 0.65rem 0; }
+    .stack-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 3px;
+      background: #1a1a1a;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .project-points { list-style: none; }
+    .project-points li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 3px 0 3px 16px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .project-points li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-item {
+      margin-bottom: 1.3rem;
+      padding-left: 1.1rem;
+      border-left: 2px solid var(--border);
+    }
+    .edu-item.current { border-left-color: var(--accent); }
+    .edu-degree { font-weight: 500; font-size: 0.95rem; }
+    .edu-school { color: var(--muted); font-size: 0.85rem; margin-bottom: 2px; }
+    .edu-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    /* ── CERTIFICATES ── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 9px;
+    }
+    .cert-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-size: 13px;
+    }
+    .cert-item span {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      margin-top: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #444;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 500px) {
+      .hero { padding: 3rem 1rem 2.5rem; }
+      .section { padding: 2rem 1rem 1.5rem; }
+      .project-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="tag"><span class="dot"></span> open to opportunities</div>
+    <h1 class="name">Kshitij <span>Jha</span></h1>
+    <p class="subtitle">Computer Science &amp; Engineering &nbsp;·&nbsp; Lovely Professional University</p>
+    <div class="links">
+      <a class="link-btn" href="https://www.linkedin.com/in/kshitijjha07" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <a class="link-btn" href="https://github.com/kshitijjha07" target="_blank" rel="noopener">↗ GitHub</a>
+      <a class="link-btn" href="mailto:jhakshitij100@gmail.com">✉ jhakshitij100@gmail.com</a>
+      <a class="link-btn" href="tel:+917428728712">✆ +91 74287 28712</a>
+    </div>
+  </header>
+
+  <!-- SKILLS -->
+  <section class="section">
+    <div class="section-label">skills</div>
+    <div class="skill-group">
+      <div class="skill-title">languages</div>
+      <div class="pills">
+        <span class="pill lang">Java</span>
+        <span class="pill lang">C++</span>
+        <span class="pill lang">Python</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-title">tools &amp; platforms</div>
+      <div class="pills">
+        <span class="pill tool">AWS</span>
+        <span class="pill tool">Docker</span>
+        <span class="pill tool">Kubernetes</span>
+        <span class="pill tool">Git</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-title">soft skills</div>
+      <div class="pills">
+        <span class="pill">Problem-Solving</span>
+        <span class="pill">Collaboration</span>
+        <span class="pill">Project Management</span>
+        <span class="pill">Adaptability</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section">
+    <div class="section-label">projects</div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-name">Spring Boot App Deployment on AWS</span>
+        <span class="project-date">Mar '25</span>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Java</span>
+        <span class="stack-tag">Spring Boot</span>
+        <span class="stack-tag">Elastic Beanstalk</span>
+        <span class="stack-tag">CloudWatch</span>
+      </div>
+      <ul class="project-points">
+        <li>Built a Spring Boot web app with an integrated Java Swing UI for seamless user interaction</li>
+        <li>Deployed on AWS Elastic Beanstalk with auto-scaling and load balancing for high availability</li>
+        <li>Used CloudWatch to monitor performance, traffic metrics, and operational health</li>
+      </ul>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-name">Dice Roller Game</span>
+        <span class="project-date">Jun '25</span>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Java</span>
+        <span class="stack-tag">Java Swing</span>
+        <span class="stack-tag">AWS Lambda</span>
+        <span class="stack-tag">DynamoDB</span>
+      </div>
+      <ul class="project-points">
+        <li>Developed interactive game with real-time dice animation and event-driven gameplay</li>
+        <li>Integrated AWS Lambda + DynamoDB backend for storing scores and game statistics</li>
+        <li>Deployed on AWS ensuring scalability, low latency, and smooth user experience</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section class="section">
+    <div class="section-label">training</div>
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-name">Data Structures using Java</span>
+        <span class="project-date">Jun–Jul '25</span>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">Cipher Schools</span>
+      </div>
+      <ul class="project-points">
+        <li>Implemented arrays, linked lists, stacks, queues, hash maps, and trees in Java</li>
+        <li>Optimized algorithms using Java Collections Framework; applied OOP principles and generics</li>
+        <li>Built reusable, type-safe data structure implementations with encapsulation and modularity</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <div class="section-label">education</div>
+    <div class="edu-item current">
+      <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
+      <div class="edu-school">Lovely Professional University, Phagwara</div>
+      <div class="edu-meta">Aug 2023 – Present &nbsp;·&nbsp; CGPA: 6.32</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-degree">Intermediate (PCM)</div>
+      <div class="edu-school">S.V. Dichaun Kalan, Najafgarh, New Delhi</div>
+      <div class="edu-meta">2022–23 &nbsp;·&nbsp; 75.8%</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-degree">Matriculation</div>
+      <div class="edu-school">G.B.S.S.S. Jharoda Kalan, Najafgarh, New Delhi</div>
+      <div class="edu-meta">2020–21 &nbsp;·&nbsp; 86.2%</div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section class="section">
+    <div class="section-label">certificates</div>
+    <div class="cert-grid">
+      <div class="cert-item">Data Science using Python<span>Cse Pathshala · Mar '24</span></div>
+      <div class="cert-item">DSA using Java<span>Cipher Schools · Apr '24</span></div>
+      <div class="cert-item">Predictive Modeling<span>Jul '25</span></div>
+      <div class="cert-item">Git<span>Cipher Schools · Jul '25</span></div>
+    </div>
+  </section>
+
+  <footer>
+    kshitij jha &nbsp;·&nbsp; built with html &amp; css &nbsp;·&nbsp; 2025
+  </footer>
+
+</body>
+</html>
